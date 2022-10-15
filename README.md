@@ -54,7 +54,7 @@ Meningkatkan conversion rate dan menurunkan cost Marketing
 
 ### 2. EDA, Insight, & Visualization
 #### Descriptive Statistic
-<img src="/src/to/img.jpg" alt="Alt text" title="Optional title">
+![My Image](src/df_info.png)
 
 1. age (numeric)
 2. job : type of job (categorical: "admin.","unknown","unemployed","management","housemaid","entrepreneur","student",
@@ -74,10 +74,84 @@ Meningkatkan conversion rate dan menurunkan cost Marketing
 15. previous: number of contacts performed before this campaign and for this client (numeric)
 16. poutcome: outcome of the previous marketing campaign (categorical: "unknown","other","failure","success")
 17. y - has the client subscribed a term deposit? (binary: "yes","no")
-#### Univariate Statistic
-#### Multivariate Statistic
-#### Business Insight
 
+![My Image](src/missing_value.png)
+
+terdapat beberapa yang ada missing value (job,education,contact,poutcome) yang semuanya categorical
+
+![My Image](src/df_describe.png)
+![My Image](src/count.png)
+
+
+#### Univariate Statistic
+##### Boxplot
+![My Image](src/boxplot_1.png)
+
+##### KDEplot
+![My Image](src/kdeplot1.png)
+
+##### Barplot
+![My Image](src/barplot.png)
+![My Image](src/barplot2.png)
+![My Image](src/barplot3.png)
+
+#### Multivariate Statistic
+##### Heatmap
+![My Image](src/heatmap1.png)
+#### Business Insight
+![My Image](src/bi1.png)
+
+![My Image](src/bi2.png)
+
+![My Image](src/bi3.png)
+
+![My Image](src/bi4.png)
+
+![My Image](src/bi5.png)
+
+![My Image](src/bi6.png)
+
+![My Image](src/bi7.png)
+
+![My Image](src/bi8.png)
+
+### 2. Data Pre-Processing
+#### Data Cleansing
+Unknown merupakan data dengan missing value pada Dataset Banking and Marketing
+
+Pada variable job, kami melakukan drop data karena jumlah data relatif sedikit
+Sedangkan pada variable education, contact, dan poutcome, kami menggunakan nilai modus untuk mengisi missing value dengan nilai terbanyak
+
+#### Handling duplicated data
+Tidak ada duplikasi data pada Dataset Banking and Marketing
+
+#### Handling Outliers
+untuk Handling Outliers kita menggunakan metode IQR untuk ['age'], Z-score untuk ['previous','duration','balance','campaign'] agar tidak terlalu banyak outlier yang di hapus jika menggunakan IQR semua
+
+Sebelum Imputation
+![My Image](src/boxplot_1.png)
+
+Setelah Imputation
+![My Image](src/boxplot_2.png)
+
+Masih terdapat outlier pada beberapa varible. Hal ini disebabkan oleh penggunaan metode z-score yang tidak menghapus seluruh outlier. Akan tetapi, pemilihan metode ini dilakukan agar jumlah data yang mengaalami clensing tidak banyak atau kurang dari 10%. Setelah dilakukan cleansing, jumlah data menjadi 41444 yang sebelumnya sebanyak 44923 dimana persentase cleansing data sebanyak 7,7%
+
+#### Feature Transformation
+Log transformation
+
+![My Image](src/log.png)
+Setelah melakukan feature transformation terhadap ketiga metode, Kami memutuskan untuk mwnggunakan transformasi logaritma untuk variable balance dan duration, sedangkan untuk variable lainnya tidak dilakukan perubahan
+
+#### Feature Encoding
+##### 1.Label Encoding
+![My Image](src/label.png)
+
+kolom yang di ubah menggunakan label encoding adalah ['marital','education','default','housing','loan','contact','poutcome']
+
+##### One-hot Encoding
+![My Image](src/hot.png)
+
+kolom yang di ubah menggunakan one-hot encoding adalah ['job','bulan']
 
 ## Reference
 test edit
