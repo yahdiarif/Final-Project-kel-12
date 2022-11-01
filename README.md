@@ -115,7 +115,7 @@ terdapat beberapa yang ada missing value (job,education,contact,poutcome) yang s
 
 ![My Image](src/bi8.png)
 
-### 2. Data Pre-Processing
+### 3. Data Pre-Processing
 #### Data Cleansing
 Unknown merupakan data dengan missing value pada Dataset Banking and Marketing
 
@@ -152,6 +152,63 @@ kolom yang di ubah menggunakan label encoding adalah ['marital','education','def
 ![My Image](src/hot.png)
 
 kolom yang di ubah menggunakan one-hot encoding adalah ['job','bulan']
+
+#### Feature Engineering
+##### Feature Selection
+Varible 'pday' dihapus karena kurang relevan terhadap modeling yang akan dibuat
+
+##### Feature Extraction
+Kami tidak melakukan feature extraction karena setelah dilakukan feature extraction terhadap beberapa kolom yaitu kolom age, balance, dan duration, korelasi tidak berubah bahkan cenderung menurun
+
+### 4. Machine Learning Modeling & Evaluation
+
+#### Class Imbalance
+karena target imbalance, maka kami lakukan oversampling.SMOTE, agar pe-modelan lebih baik lagi.
+#### Modelling
+Pada tahap processing, kami mencoba menggunakan 4 algoritma modelling yaitu Logistic Regression, DecisionTree, Random Forest, dan XGBoost
+
+##### Logistic Regression
+![My Image](src/m_log1.png)
+![My Image](src/m_log2.png)
+
+##### Decision Tree
+![My Image](src/m_dt.png)
+
+##### Random Forest
+![My Image](src/m_rs.png)
+
+##### XGBost
+![My Image](src/m_xg.png)
+
+##### Result
+
+Berdasarkan hasil evaluasi, kami memutuskan untuk menggunakan algoritma XGBoost. Hal ini dikarenakan, penggunaan Logistic regression dianggap kurang tepat karena fitur yang digunakan non-linear. Sedangkan untuk Decision tree dan Random forest, hasil evaluasi menunjukkan bahwa terdapat overfitting pada hasil modelling. Pada XGBoost, nilai evaluasi lebih baik disbanding 3 algoritma lainnya dimana overfitting minimum
+
+#### Model Evaluation
+Kami menggunakan matrix evaluasi berupa nilai precision. Penggunaan matrix precision pada evaluasi kami gunakan sesuai dengan business matrix yang kami tetapkan sebelumnya (STAGE 0) dimana kami menfokuskan pada pengurangan cost dalam melakukan marketing ke client bank. Dalam hal ini, penggunaan precision akan memvalidasi nilai False Positive atau kesalahan prediksi berupa penetapan client yang seharusnya tidak melakukan subscribe tetapi diprediksi akan melakukan subscribe. Dengan focus terhadap nilai precision, kesalahan tersebut akan terminimalisir yang selanjutnya diharapkan akan meminimalkan cost saat melakukan marketing.
+
+![My Image](src/m_xg.png)
+
+Berdasarkan gambar diatas, dapat dilihat bahwa seluruh matrix evaluasi memiliki nilai yang cukup baik, serta pada matrix precision, nilai test dan train tidak mengalami overfitting. Akan tetapi,  mempertimbangkan hasil algoritma lainnya yang berindikasi overfitting, kami memutuskan untuk melakukan tunning hyperparameter.
+
+Berdasarkan nilai cross validation dapat kita lihat bahwa model mengalami overfitting sehingga kami mencoba untuk melakukan hyperparameter tunning
+
+![My Image](src/m_lc.png)
+
+Berdasarkan gambar diatas (parameter min_child_weight), kami menggunakan nilai dengan range 27-28 untuk melakukan hyperparameter tunning
+
+![My Image](src/m_xgbost.png)
+
+Setelah dilakukan hyperparameter tunning, diperoleh nilai presisi sebesar 0,95 untuk data test dan 0,98 untuk data train. Kami memvalidasi nilai tersebut terhadap hasil cross validation dimana setelah dilakukan tunning, cross validation pada data test mengalami peningkatan sebesar 0,02 atau 2%
+
+#### Feature Important
+![My Image](src/m_fi.png)
+
+Beberapa fitur yang memiki yang besar terhadap bisnis seperti fitur housing, loan, month (juli, agustus, juni)
+
+Untuk marketing selanjutnya, bank dapat fokus terhadap client yang memiliki housing dan loan serta melakukan marketing pada pertengahan tahun atau mulai dari bulan juni-agustus
+
+
 
 ## Reference
 test edit
